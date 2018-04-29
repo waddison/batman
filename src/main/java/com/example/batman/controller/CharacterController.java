@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("marvel/character/")
@@ -28,15 +30,21 @@ public class CharacterController {
 
 
     @RequestMapping(value = "all", method = RequestMethod.GET)
-    public String list() throws IOException {
+    public List<Character> list() throws IOException {
         String marvelURL = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelapikey + "&ts=" + marvelts + "&hash=" + marvelhash;
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(marvelURL, String.class);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(responseEntity.getBody());
         JsonNode results = root.path("data").path("results");
-        Character character = mapper.readValue(results.get(0).toString(), Character.class);
+        List<Character>characters = new ArrayList<Character>();
+        for(int i = 0; i < results.size(); i++) {
+            Character character = mapper.readValue(results.get(i).toString(), Character.class);
+            characters.add(character);
+        }
 
-        return character.toString();
+        return characters;
     }
+
+
 }
