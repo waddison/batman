@@ -28,6 +28,7 @@ public class CharacterController {
 
 
 
+
     @RequestMapping(value = "characters", method = RequestMethod.GET)
     public List<Character> list() throws IOException {
         String marvelURL = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelapikey + "&ts=" + marvelts + "&hash=" + marvelhash;
