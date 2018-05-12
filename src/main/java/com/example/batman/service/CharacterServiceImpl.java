@@ -39,14 +39,14 @@ public class CharacterServiceImpl implements CharacterService{
     @Override
     public Character getCharacter(String name) throws IOException {
 
-        List<Character> character = characterRepository.getCharacter(name);
-
-        if (character.isEmpty()) {
-            character.add(grabCharacter(name));
+        List<Character> characters = characterRepository.getCharacter(name);
+        Character mvChar = null;
+        if (characters.isEmpty()) {
+            return grabCharacter(name);
         }
 
 
-        return null;
+        return characters.get(0);
     }
 
     private Character grabCharacter(String name) throws IOException {
@@ -58,7 +58,7 @@ public class CharacterServiceImpl implements CharacterService{
         JsonNode results = root.path("data").path("results");
         Character character = mapper.readValue(results.get(0).toString(), Character.class);
         characterRepository.save(character);
-
+        System.out.println(character.toString());
         return character;
     }
 

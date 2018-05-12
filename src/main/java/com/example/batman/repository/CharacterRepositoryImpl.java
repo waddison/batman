@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @Transactional
@@ -18,10 +19,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public List<Character> getCharacter(String name) {
-
-        String hql = "FROM Character WHERE name = ?";
-        List<Character> character =  em.createQuery(hql).setParameter(1, name).getResultList();
-        //Query query = em.createQuery("Select c from Character c where ");
+        List<Character> character;
+        String hql = "FROM Character as c WHERE c.name = :name";
+         character = (List<Character>) em.createQuery(hql).setParameter("name", name).getResultList();
+        if (character.isEmpty() || character == null) {
+            character = Collections.emptyList();
+        }
 
         return character;
     }
@@ -30,5 +33,6 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     public void save(Character character) {
         em.persist(character);
         em.flush();
+
     }
 }

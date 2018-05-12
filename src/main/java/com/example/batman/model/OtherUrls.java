@@ -9,19 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+//@Entity
 @ToString
 @Setter
 @Getter
 public class OtherUrls {
 
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue
     private Long id;
 
     private String url;
 
-    @ManyToOne
+    //@ManyToOne
     private Character character;
 
 
