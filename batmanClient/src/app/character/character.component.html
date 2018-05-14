@@ -1,0 +1,12 @@
+<div>
+  <h3>Search for a character</h3>
+  <br>
+  <label>Character to find:</label>
+  <input placeholder="..." #searchName>
+  <button (click)="getCharacter(searchName.value)">Search</button>
+</div>
+<div *ngIf="character">
+  You searched for {{character.name}}
+  <br>
+  {{character.name}}'s description: {{character.description}}
+</div>
