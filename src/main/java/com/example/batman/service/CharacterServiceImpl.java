@@ -40,12 +40,9 @@ public class CharacterServiceImpl implements CharacterService{
     public Character getCharacter(String name) throws IOException {
 
         List<Character> characters = characterRepository.getCharacter(name);
-        Character mvChar = null;
         if (characters.isEmpty()) {
             return grabCharacter(name);
         }
-
-
         return characters.get(0);
     }
 

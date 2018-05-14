@@ -34,6 +34,11 @@ public class Character {
     private Date modified;
     private String resourceURI;
 
+    
+    private List<Comic> comics;
+
    /*@OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    private List<OtherUrls> urls = new ArrayList<>();*/
+
+
 }

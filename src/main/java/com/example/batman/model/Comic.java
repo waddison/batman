@@ -11,14 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Comics {
+public class Comic {
 
     @Id
     @GeneratedValue
@@ -30,6 +29,7 @@ public class Comics {
 
     private String title;
     private int issueNumber;
+    private String variantDescription;
 
     @Column(length = 2000)
     private String description;
