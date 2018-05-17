@@ -1,6 +1,5 @@
 package com.example.batman.controller;
 
-import com.example.batman.model.Character;
 import com.example.batman.model.Comic;
 import com.example.batman.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;

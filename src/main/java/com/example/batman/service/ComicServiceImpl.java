@@ -28,7 +28,7 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public void save(Comic comic) {
-
+        comicRepository.save(comic);
     }
 
     @Override

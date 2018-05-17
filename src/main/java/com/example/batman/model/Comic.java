@@ -38,8 +38,6 @@ public class Comic {
     private int pageCount;
     private String resourceURI;
     private Date modified;
-    //private List<Character> characters;
-
 
 
 
