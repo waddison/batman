@@ -34,7 +34,22 @@ public class Character {
     private String description;
     private Date modified;
     private String resourceURI;
+    private HashMap<String, String> thumbnail = new HashMap<>();
+
+
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "character_Comic",
+            joinColumns = {@JoinColumn(name = "marvId")},
+            inverseJoinColumns = {@JoinColumn(name = "marvComicId")}
+    )
+    private List<Comic> comics = new ArrayList<>();*/
+
+
+
 
    /*@OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    private List<OtherUrls> urls = new ArrayList<>();*/
+
+
 }

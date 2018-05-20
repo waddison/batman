@@ -4,6 +4,7 @@ import com.example.batman.model.Character;
 import com.example.batman.repository.CharacterRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,6 @@ public class CharacterServiceImpl implements CharacterService{
         if (characters.isEmpty()) {
             return grabCharacter(name);
         }
-
-
         return characters.get(0);
     }
 
@@ -53,11 +52,15 @@ public class CharacterServiceImpl implements CharacterService{
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(marvelURL + "&name=" + name, String.class);
         ObjectMapper mapper = new ObjectMapper();
+
         JsonNode root = mapper.readTree(responseEntity.getBody());
-        JsonNode results = root.path("data").path("results");
-        Character character = mapper.readValue(results.get(0).toString(), Character.class);
-        characterRepository.save(character);
-        System.out.println(character.toString());
+        ArrayNode results = (ArrayNode)root.path("data").path("results");
+        Character character = null;
+        for(JsonNode node : results) {
+            character = mapper.readValue(node.toString(), Character.class);
+            characterRepository.save(character);
+            System.out.println(character.toString());
+        }
         return character;
     }
 

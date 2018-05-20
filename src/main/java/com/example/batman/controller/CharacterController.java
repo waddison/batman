@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("batman/api/v1/")
+@RequestMapping("batman/api/v1/character")
 public class CharacterController {
 
 
@@ -27,6 +27,11 @@ public class CharacterController {
     @Autowired
     private CharacterService characterService;
 
+    @RequestMapping(value="{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Character> get(@PathVariable String name) throws IOException {
+        Character mvChar = characterService.getCharacter(name);
+        return new ResponseEntity<>(mvChar,HttpStatus.OK);
+    }
     /*@RequestMapping(value = "characters", method = RequestMethod.GET)
     public List<Character> list() throws IOException {
         *//*String marvelURL = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelapikey + "&ts=" + marvelts + "&hash=" + marvelhash;
@@ -39,14 +44,9 @@ public class CharacterController {
         for(int i = 0; i < results.size(); i++) {
             Character character = mapper.readValue(results.get(i).toString(), Character.class);
             characters.add(character);
+
         }*//*
         return characters;
     }*/
-
-    @RequestMapping(value="character/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Character> get(@PathVariable String name) throws IOException {
-        Character mvChar = characterService.getCharacter(name);
-        return new ResponseEntity<>(mvChar,HttpStatus.OK);
-    }
 
 }
