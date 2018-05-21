@@ -39,12 +39,17 @@ public class CharacterServiceImpl implements CharacterService{
 
     @Override
     public Character getCharacter(String name) throws IOException {
-
         List<Character> characters = characterRepository.findByName(name);
         if (characters.isEmpty()) {
             return grabCharacter(name);
         }
         return characters.get(0);
+    }
+
+    @Override
+    public List<Character> getCharacters() {
+        List<Character> characters = characterRepository.findAll();
+        return characters;
     }
 
     private Character grabCharacter(String name) throws IOException {
