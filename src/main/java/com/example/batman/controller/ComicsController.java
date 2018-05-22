@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("batman/api/v1/comic")
@@ -25,5 +26,11 @@ public class ComicsController {
         int id = Integer.parseInt(ident);
         Comic comic = comicService.getComic(id);
         return new ResponseEntity<>(comic,HttpStatus.OK);
+    }
+
+    @RequestMapping(value ="all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Comic>> getAll() {
+        List<Comic> comics = comicService.getComics();
+        return new ResponseEntity<>(comics, HttpStatus.OK);
     }
 }

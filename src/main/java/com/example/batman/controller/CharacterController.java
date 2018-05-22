@@ -29,8 +29,8 @@ public class CharacterController {
 
     @RequestMapping(value="{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Character> get(@PathVariable String name) throws IOException {
-        Character mvChar = characterService.getCharacter(name);
-        return new ResponseEntity<>(mvChar, HttpStatus.OK);
+        Character character = characterService.getCharacter(name);
+        return new ResponseEntity<>(character, HttpStatus.OK);
     }
 
     @RequestMapping(value = "all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
