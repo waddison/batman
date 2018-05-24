@@ -34,11 +34,16 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public Comic getComic(int id) throws IOException {
 
-        List<Comic> comics = comicRepository.getComic(id);
+        List<Comic> comics = comicRepository.findById(id);
         if (comics.isEmpty()) {
             return grabComic(id);
         }
         return comics.get(0);
+    }
+
+    @Override
+    public List<Comic> getComics() {
+        return comicRepository.findAll();
     }
 
     private Comic grabComic(int id) throws IOException {
